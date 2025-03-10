@@ -15,41 +15,24 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
 
     private Assignment[] assignmentList;
 
-    public AssignAdapter(ArrayList<Assignment> assignmentList) { this.assignmentList = assignmentList.toArray(new Assignment[0]); }
+    public AssignAdapter(ArrayList<Assignment> assignmentList) {
+    }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(listItem);
+    public AssignAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Assignment assignData = assignmentList[position];
-        holder.nameText.setText(assignmentList[position].getName());
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public void onBindViewHolder(@NonNull AssignAdapter.ViewHolder holder, int position) {
 
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return assignmentList.length;
+        return 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameText;
-        public RelativeLayout relativeLayout;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            this.nameText = itemView.findViewById(R.id.nameText);
-            relativeLayout = itemView.findViewById(R.id.relativeLayout);
-        }
-    }
 }

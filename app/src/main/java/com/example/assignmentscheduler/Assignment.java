@@ -1,34 +1,29 @@
 package com.example.assignmentscheduler;
 
-import android.os.Build;
+import java.util.Calendar;
+import java.util.TimeZone;
 
-import java.time.*;
+
 
 public class Assignment {
-
-    enum assignType { None, Homework, Essay, Project, Exam}
-    enum assignLength { None, Short, Medium, Long, Extra_Long}
-
     private String assignName;
-    private LocalDate startDate;
-    private LocalDateTime endDate;
-    private assignType type;
-    private assignLength length;
+    private Calendar startDate;
+    private Calendar endDate;
+    private AssignType type;
+    private AssignLength length;
 
     public Assignment() {
-        assignName = "";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startDate = LocalDate.now();
-            endDate = LocalDateTime.now();
-        }
-        assignType type = assignType.None;
-        assignLength length = assignLength.None;
+        this.assignName = "";
+        this.startDate = Calendar.getInstance();
+        this.endDate = null;
+        this.type = assignType.None;
+        this.length = assignLength.None;
     }
 
     public Assignment(String name, String[] sDate, String[] eDate, String aType, String aLength) {
         assignName = name;
         startDate = convertToDate(sDate);
-        endDate = convertToDateTime(eDate);
+        endDate = convertToDate(eDate);
         type = assignType.valueOf(aType);
         length = assignLength.valueOf(aLength);
     }
@@ -36,46 +31,43 @@ public class Assignment {
     public void modifyAssignment(String name, String[] sDate, String[] eDate, String aType, String aLength) {
         assignName = name;
         startDate = convertToDate(sDate);
-        endDate = convertToDateTime(eDate);
+        endDate = convertToDate(eDate);
         type = assignType.valueOf(aType);
         length = assignLength.valueOf(aLength);
     }
 
-    private LocalDate convertToDate(String[] date) {
-        LocalDate finalDate = null;
+    private Calendar convertToDate(String[] date) {
+        Calendar finalDate = Calendar.getInstance(TimeZone.getDefault());
         int month, day, year;
         month = Integer.parseInt(date[0]);
         day = Integer.parseInt(date[1]);
         year = Integer.parseInt(date[2]);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            finalDate = LocalDate.of(day, month, year);
-        }
-        return finalDate;
-    }
-
-    private LocalDateTime convertToDateTime(String[] dateTime) {
-        LocalDateTime finalDate = null;
-        int month, day, year, hour, min;
-        month = Integer.parseInt(dateTime[0]);
-        day = Integer.parseInt(dateTime[1]);
-        year = Integer.parseInt(dateTime[2]);
-        hour = Integer.parseInt(dateTime[3]);
-        min = Integer.parseInt(dateTime[4]);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            finalDate = LocalDateTime.of(day, month, year, hour, min);
-        }
+        finalDate.set(year, month, day);
         return finalDate;
     }
 
     public String getName() {
         return assignName;
     }
-
-    public LocalDate getStartDate() {
+    public Calendar getStartDate() {
         return startDate;
     }
-    public LocalDateTime getEndDate() {
+    public String printSDate() {
+        String date = "";
+        date += startDate.get(Calendar.MONTH) + " ";
+        date += startDate.get(Calendar.DAY_OF_MONTH) + " ";
+        date += startDate.get(Calendar.YEAR) + " ";
+        return date;
+    }
+    public Calendar getEndDate() {
         return endDate;
+    }
+    public String printEDate() {
+        String date = "";
+        date += endDate.get(Calendar.MONTH) + " ";
+        date += endDate.get(Calendar.DAY_OF_MONTH) + " ";
+        date += endDate.get(Calendar.YEAR) + " ";
+        return date;
     }
     public String getType() {
         return type.toString();

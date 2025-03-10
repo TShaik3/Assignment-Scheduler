@@ -8,4 +8,7 @@
     <string name="length">Length:</string>
     <string name="explanation">Explanation:</string>
     <string name="save">Save</string>
+    <string name="assignment_name">Assignment Name</string>
+    <string name="assignment_due_date">Assignment Due Date</string>
+    <string name="time_left">Time Left</string>
 </resources>

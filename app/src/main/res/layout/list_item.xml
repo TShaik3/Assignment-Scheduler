@@ -1,38 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout"
+<?xml version="1.0" encoding="utf-8"?><!--XML implementation of Card Layout-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeightLarge"
-    android:background="@drawable/border">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
 
-    <TextView
-        android:id="@+id/nameText"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
-    <TextView
-        android:id="@+id/startText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-    <TextView
-        android:id="@+id/endText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-    <TextView
-        android:id="@+id/typeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-         />
-    <TextView
-        android:id="@+id/lengthText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-         />
-</RelativeLayout>
+        android:layout_margin="3dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/assignmentName"
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_margin="2dp"
+            android:padding="5dp"
+            android:text="@string/assignment_name"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/assignmentDue"
+            android:layout_width="288dp"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_margin="2dp"
+            android:padding="5dp"
+            android:text="@string/assignment_due_date"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:layout_row="0"
+            android:layout_column="3"
+            android:text="@string/time_left" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="26dp"
+            android:layout_height="27dp"
+            android:layout_row="0"
+            android:layout_column="2" />
+
+        <TextView
+            android:id="@+id/lengthText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="3"
+            android:text="@string/length" />
+    </GridLayout>
+
+</androidx.cardview.widget.CardView>
