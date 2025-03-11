@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        AssignAdapter adapter = new AssignAdapter(listOfAssignments);
+        AssignAdapter adapter = new AssignAdapter(listOfAssignments, getApplicationContext());
         mainList.setHasFixedSize(true);
         mainList.setLayoutManager(new LinearLayoutManager(this));
         mainList.setAdapter(adapter);

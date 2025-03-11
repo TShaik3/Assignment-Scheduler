@@ -1,5 +1,5 @@
 package com.example.assignmentscheduler;
 
-public enum assignLength {
+public enum AssignLength {
     None, Short, Medium, Long, Extra_Long
 }

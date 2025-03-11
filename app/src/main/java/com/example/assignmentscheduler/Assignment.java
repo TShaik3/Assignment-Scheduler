@@ -3,8 +3,6 @@ package com.example.assignmentscheduler;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-
-
 public class Assignment {
     private String assignName;
     private Calendar startDate;
@@ -16,24 +14,24 @@ public class Assignment {
         this.assignName = "";
         this.startDate = Calendar.getInstance();
         this.endDate = null;
-        this.type = assignType.None;
-        this.length = assignLength.None;
+        this.type = AssignType.None;
+        this.length = AssignLength.None;
     }
 
     public Assignment(String name, String[] sDate, String[] eDate, String aType, String aLength) {
         assignName = name;
         startDate = convertToDate(sDate);
         endDate = convertToDate(eDate);
-        type = assignType.valueOf(aType);
-        length = assignLength.valueOf(aLength);
+        type = AssignType.valueOf(aType);
+        length = AssignLength.valueOf(aLength);
     }
 
     public void modifyAssignment(String name, String[] sDate, String[] eDate, String aType, String aLength) {
         assignName = name;
         startDate = convertToDate(sDate);
         endDate = convertToDate(eDate);
-        type = assignType.valueOf(aType);
-        length = assignLength.valueOf(aLength);
+        type = AssignType.valueOf(aType);
+        length = AssignLength.valueOf(aLength);
     }
 
     private Calendar convertToDate(String[] date) {
@@ -46,6 +44,22 @@ public class Assignment {
         return finalDate;
     }
 
+    public String getTimeBetween() {
+        long timeInMillis1 = startDate.getTimeInMillis();
+        long timeInMillis2 = endDate.getTimeInMillis();
+
+        long differenceInMillis = timeInMillis2 - timeInMillis1;
+        long differenceInHours = differenceInMillis / (1000 * 60 * 60);
+        long differenceInDays = differenceInMillis / (1000 * 60 * 60 * 24);
+
+        if (differenceInDays < 1) {
+            return differenceInHours + " hrs";
+        }
+        else {
+            return differenceInDays + " days";
+        }
+    }
+
     public String getName() {
         return assignName;
     }
@@ -54,9 +68,9 @@ public class Assignment {
     }
     public String printSDate() {
         String date = "";
-        date += startDate.get(Calendar.MONTH) + " ";
-        date += startDate.get(Calendar.DAY_OF_MONTH) + " ";
-        date += startDate.get(Calendar.YEAR) + " ";
+        date += startDate.get(Calendar.MONTH) + "/";
+        date += startDate.get(Calendar.DAY_OF_MONTH) + "/";
+        date += startDate.get(Calendar.YEAR) + "/";
         return date;
     }
     public Calendar getEndDate() {
@@ -64,9 +78,9 @@ public class Assignment {
     }
     public String printEDate() {
         String date = "";
-        date += endDate.get(Calendar.MONTH) + " ";
-        date += endDate.get(Calendar.DAY_OF_MONTH) + " ";
-        date += endDate.get(Calendar.YEAR) + " ";
+        date += endDate.get(Calendar.MONTH) + "/";
+        date += endDate.get(Calendar.DAY_OF_MONTH) + "/";
+        date += endDate.get(Calendar.YEAR) + "/";
         return date;
     }
     public String getType() {
@@ -74,5 +88,8 @@ public class Assignment {
     }
     public String getLength() {
         return length.toString();
+    }
+    public String printTotalDate() {
+        return printSDate() + " - " + printEDate();
     }
 }
