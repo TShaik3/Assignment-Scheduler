@@ -18,6 +18,8 @@ public class newAssignment extends AppCompatActivity {
     TextInputLayout lengthText;
     Button saveButton;
 
+    Assignment newAssign;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class newAssignment extends AppCompatActivity {
         typeText = findViewById(R.id.typeEditText);
         lengthText = findViewById(R.id.lengthEditText);
         saveButton = findViewById(R.id.saveButton);
+
+        newAssign = new Assignment();
 
         MaterialDatePicker.Builder startDatePicker = MaterialDatePicker.Builder.datePicker();
         startDatePicker.setTitleText("SELECT A DATE");
@@ -69,7 +73,7 @@ public class newAssignment extends AppCompatActivity {
             String type = typeText.toString();
             String length = lengthText.toString();
 
-            Assignment newAssign = new Assignment(name, startDateDetail, endDateDetail, type, length);
+            newAssign.modifyAssignment(name, startDateDetail, endDateDetail, type, length);
 
             savedInstanceState.putParcelable("assignment", (Parcelable) newAssign);
         });
