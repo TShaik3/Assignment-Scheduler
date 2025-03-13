@@ -3,14 +3,12 @@ package com.example.assignmentscheduler;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -32,11 +30,8 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Assignment> listOfAssignments = new ArrayList<>();
 
         createAssignment.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), newAssignment.class);
+            Intent intent = new Intent(getApplicationContext(), NewAssignment.class);
             startActivity(intent);
-
-            listOfAssignments.add((Assignment) savedInstanceState.get("assignment"));
-
         });
 
         AssignAdapter adapter = new AssignAdapter(listOfAssignments, getApplicationContext());

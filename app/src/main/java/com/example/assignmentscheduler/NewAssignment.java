@@ -10,7 +10,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class newAssignment extends AppCompatActivity {
+public class NewAssignment extends AppCompatActivity {
     TextInputLayout nameText;
     TextInputLayout startDateText;
     TextInputLayout endDateText;
@@ -75,7 +75,8 @@ public class newAssignment extends AppCompatActivity {
 
             newAssign.modifyAssignment(name, startDateDetail, endDateDetail, type, length);
 
-            savedInstanceState.putParcelable("assignment", (Parcelable) newAssign);
+            // TODO: Save to database/SharedPreferences
+            //savedInstanceState.putParcelable("assignment", (Parcelable) newAssign);
         });
     }
 }
