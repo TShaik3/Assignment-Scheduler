@@ -7,14 +7,14 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="305dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="264dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="46dp"
         android:text="@string/create_new_assignment"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -34,8 +34,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/name"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -57,8 +57,8 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="date"
         android:hint="@string/start_date"
+        android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText">
 
@@ -66,7 +66,7 @@
             android:id="@+id/startEditField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableEnd="@drawable/calendar_blank" />
+            android:drawableEnd="@drawable/calendar_today_24px" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +86,8 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/end_date"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startEditText">
 
@@ -95,44 +95,42 @@
             android:id="@+id/endEditField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableEnd="@drawable/calendar_blank" />
+            android:drawableEnd="@drawable/calendar_today_24px" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/typeEditText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="366dp"
         android:layout_height="60dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/type"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endEditText">
 
         <AutoCompleteTextView
             android:id="@+id/typeEditField"
-            android:hint="@string/type"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/lengthEditText"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="366dp"
         android:layout_height="60dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/length"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typeEditText">
 
         <AutoCompleteTextView
             android:id="@+id/lengthEditDrop"
-            android:hint="@string/length"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -140,12 +138,52 @@
     <Button
         android:id="@+id/saveButton"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="65dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:drawableTop="@drawable/check_bold"
-        android:text="@string/save"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/save"
+        android:drawableTop="@drawable/check_24px"
+        android:gravity="center"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/cancel"
+        android:drawableTop="@drawable/close_24px"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

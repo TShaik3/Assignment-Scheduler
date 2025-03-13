@@ -11,4 +11,7 @@
     <string name="assignment_name">Assignment Name</string>
     <string name="assignment_due_date">Assignment Due Date</string>
     <string name="time_left">Time Left</string>
+    <string name="scheduler">Scheduler</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 </resources>
