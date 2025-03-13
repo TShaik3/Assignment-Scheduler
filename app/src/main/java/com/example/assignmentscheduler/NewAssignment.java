@@ -9,15 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 public class NewAssignment extends AppCompatActivity {
-    TextInputLayout nameText;
-    TextInputLayout startDateText;
-    TextInputLayout endDateText;
-    TextInputLayout typeText;
-    TextInputLayout lengthText;
+    TextInputLayout nameTextLayout;
+    TextInputLayout startDateLayout;
+    TextInputLayout endDateLayout;
+    TextInputLayout typeTextLayout;
+    TextInputLayout lengthTextLayout;
     Button saveButton;
     Button cancelButton;
 
@@ -28,11 +29,11 @@ public class NewAssignment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_assignment);
 
-        nameText = findViewById(R.id.nameEditText);
-        startDateText = findViewById(R.id.startEditText);
-        endDateText = findViewById(R.id.endEditText);
-        typeText = findViewById(R.id.typeEditText);
-        lengthText = findViewById(R.id.lengthEditText);
+        nameTextLayout = findViewById(R.id.nameEditText);
+        startDateLayout = findViewById(R.id.startEditText);
+        endDateLayout = findViewById(R.id.endEditText);
+        typeTextLayout = findViewById(R.id.typeEditText);
+        lengthTextLayout = findViewById(R.id.lengthEditText);
         saveButton = findViewById(R.id.saveButton);
 
         newAssign = new Assignment();
@@ -41,7 +42,7 @@ public class NewAssignment extends AppCompatActivity {
         startDatePicker.setTitleText("SELECT A DATE");
         final MaterialDatePicker mSDatePicker = startDatePicker.build();
 
-        startDateText.setOnClickListener(v -> {
+        startDateLayout.setEndIconOnClickListener(v -> {
             mSDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
         });
         mSDatePicker.addOnPositiveButtonClickListener(
@@ -49,7 +50,7 @@ public class NewAssignment extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onPositiveButtonClick(Object selection) {
-                        startDateText.getEditText().setText(mSDatePicker.getHeaderText());
+                        startDateLayout.getEditText().setText(mSDatePicker.getHeaderText());
                 }
         });
 
@@ -57,7 +58,7 @@ public class NewAssignment extends AppCompatActivity {
         endDatePicker.setTitleText("SELECT A DATE");
         final MaterialDatePicker mEDatePicker = endDatePicker.build();
 
-        endDateText.setOnClickListener(v -> {
+        endDateLayout.setEndIconOnClickListener(v -> {
             mEDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
         });
         mEDatePicker.addOnPositiveButtonClickListener(
@@ -65,24 +66,25 @@ public class NewAssignment extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onPositiveButtonClick(Object selection) {
-                        endDateText.getEditText().setText(mEDatePicker.getHeaderText());
+                        endDateLayout.getEditText().setText(mEDatePicker.getHeaderText());
                 }
         });
 
         saveButton.setOnClickListener(v -> {
-            String name = nameText.toString();
-            String[] startDateDetail = startDateText.toString().split("/");
-            String[] endDateDetail = endDateText.toString().split("/");
-            String type = typeText.toString();
-            String length = lengthText.toString();
+            String name = nameTextLayout.getEditText().getText().toString();
+            String[] startDateDetail = startDateLayout.getEditText().getText().toString().split("/");
+            String[] endDateDetail = endDateLayout.getEditText().getText().toString().split("/");
+            String type = typeTextLayout.getEditText().getText().toString();
+            String length = lengthTextLayout.getEditText().getText().toString();
 
             newAssign.modifyAssignment(name, startDateDetail, endDateDetail, type, length);
             saveAssignment(newAssign);
-        });
-
-        cancelButton.setOnClickListener(v -> {
             finish();
         });
+
+//        cancelButton.setOnClickListener(v -> {
+//            finish();
+//        });
     }
 
     private void saveAssignment(Assignment newAssign) {
