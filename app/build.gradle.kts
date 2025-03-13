@@ -52,4 +52,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.material3)
     implementation(libs.material3.adaptive.navigation.suite)
+    implementation(libs.gson)
 }

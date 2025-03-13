@@ -1,14 +1,16 @@
 package com.example.assignmentscheduler;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 public class NewAssignment extends AppCompatActivity {
     TextInputLayout nameText;
@@ -17,6 +19,7 @@ public class NewAssignment extends AppCompatActivity {
     TextInputLayout typeText;
     TextInputLayout lengthText;
     Button saveButton;
+    Button cancelButton;
 
     Assignment newAssign;
 
@@ -74,9 +77,20 @@ public class NewAssignment extends AppCompatActivity {
             String length = lengthText.toString();
 
             newAssign.modifyAssignment(name, startDateDetail, endDateDetail, type, length);
-
-            // TODO: Save to database/SharedPreferences
-            //savedInstanceState.putParcelable("assignment", (Parcelable) newAssign);
+            saveAssignment(newAssign);
         });
+
+        cancelButton.setOnClickListener(v -> {
+            finish();
+        });
+    }
+
+    private void saveAssignment(Assignment newAssign) {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(newAssign);
+        editor.putString("newAssignment", json);
+        editor.apply();
     }
 }
