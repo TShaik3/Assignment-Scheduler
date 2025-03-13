@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class Assignment {
+    private static int id_count = 0;
+    private int id;
     private String assignName;
     private Calendar startDate;
     private Calendar endDate;
@@ -11,19 +13,12 @@ public class Assignment {
     private AssignLength length;
 
     public Assignment() {
+        this.id = ++id_count;
         this.assignName = "";
         this.startDate = Calendar.getInstance();
         this.endDate = null;
         this.type = AssignType.None;
         this.length = AssignLength.None;
-    }
-
-    public Assignment(String name, String[] sDate, String[] eDate, String aType, String aLength) {
-        assignName = name;
-        startDate = convertToDate(sDate);
-        endDate = convertToDate(eDate);
-        type = AssignType.valueOf(aType);
-        length = AssignLength.valueOf(aLength);
     }
 
     public void modifyAssignment(String name, String[] sDate, String[] eDate, String aType, String aLength) {
@@ -70,7 +65,7 @@ public class Assignment {
         String date = "";
         date += startDate.get(Calendar.MONTH) + "/";
         date += startDate.get(Calendar.DAY_OF_MONTH) + "/";
-        date += startDate.get(Calendar.YEAR) + "/";
+        date += startDate.get(Calendar.YEAR);
         return date;
     }
     public Calendar getEndDate() {
@@ -80,7 +75,7 @@ public class Assignment {
         String date = "";
         date += endDate.get(Calendar.MONTH) + "/";
         date += endDate.get(Calendar.DAY_OF_MONTH) + "/";
-        date += endDate.get(Calendar.YEAR) + "/";
+        date += endDate.get(Calendar.YEAR);
         return date;
     }
     public String getType() {
@@ -91,5 +86,9 @@ public class Assignment {
     }
     public String printTotalDate() {
         return printSDate() + " - " + printEDate();
+    }
+
+    public int getID() {
+        return id;
     }
 }

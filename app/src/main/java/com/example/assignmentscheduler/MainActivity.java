@@ -46,11 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         getNewAssignment();
-
-        AssignAdapter adapter = new AssignAdapter(listOfAssignments, getApplicationContext());
-        mainList.setHasFixedSize(true);
-        mainList.setLayoutManager(new LinearLayoutManager(this));
-        mainList.setAdapter(adapter);
+        buildRecyclerView();
     }
 
     private void getNewAssignment() {
@@ -59,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         String json = sharedPreferences.getString("newAssignment", null);
         Type type = new TypeToken<Assignment>() {}.getType();
         anAssignment = gson.fromJson(json, type);
+        listOfAssignments.add(anAssignment);
     }
 
     @Override
@@ -83,6 +80,19 @@ public class MainActivity extends AppCompatActivity {
         listOfAssignments = gson.fromJson(json, type);
         if(listOfAssignments == null) {
             listOfAssignments = new ArrayList<>();
+        }
+        checkIDS(listOfAssignments);
+    }
+
+    private void checkIDS(ArrayList<Assignment> list) {
+        int latestID = 0;
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).getID() > latestID) {
+                latestID = list.get(i).getID();
+            }
+            else if (list.get(i).getID() <= latestID){
+                list.remove(i);
+            }
         }
     }
 
