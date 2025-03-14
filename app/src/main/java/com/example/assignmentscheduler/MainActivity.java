@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,9 +47,28 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), NewAssignment.class);
             startActivity(intent);
         });
-
         getNewAssignment();
         buildRecyclerView();
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                Assignment deletedAssignment = listOfAssignments.get(viewHolder.getAdapterPosition());
+                int position = viewHolder.getAdapterPosition();
+                listOfAssignments.remove(viewHolder.getAdapterPosition());
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
+                Snackbar.make(mainList, deletedAssignment.getName(), Snackbar.LENGTH_LONG).setAction("Undo", v -> {
+                    listOfAssignments.add(position, deletedAssignment);
+                    adapter.notifyItemInserted(position);
+                }).show();
+            }
+        }).attachToRecyclerView(mainList);
     }
 
     private void getNewAssignment() {
