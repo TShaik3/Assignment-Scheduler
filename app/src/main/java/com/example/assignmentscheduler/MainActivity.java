@@ -39,14 +39,11 @@ public class MainActivity extends AppCompatActivity {
         mainList = findViewById(R.id.recyclerView);
 
         loaddata();
-        buildRecyclerView();
 
         createAssignment.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), NewAssignment.class);
             startActivity(intent);
         });
-        getNewAssignment();
-        buildRecyclerView();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
@@ -69,6 +66,21 @@ public class MainActivity extends AppCompatActivity {
         }).attachToRecyclerView(mainList);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getNewAssignment();
+        if(!listOfAssignments.isEmpty()) {
+            buildRecyclerView();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        savedata();
+    }
+
     private void getNewAssignment() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -76,12 +88,6 @@ public class MainActivity extends AppCompatActivity {
         Type type = new TypeToken<Assignment>() {}.getType();
         anAssignment = gson.fromJson(json, type);
         listOfAssignments.add(anAssignment);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        savedata();
     }
 
     private void buildRecyclerView() {

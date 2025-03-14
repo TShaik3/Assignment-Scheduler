@@ -32,6 +32,9 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.AssignView
     @Override
     public void onBindViewHolder(@NonNull AssignAdapter.AssignViewHolder holder, int position) {
         Assignment assignment = assignmentList.get(position);
+        if (assignment == null) {
+            return;
+        }
         holder.assignmentName.setText(assignment.getName());
         holder.assignmentDueDate.setText(assignment.printTotalDate());
         holder.assignmentType.setText(assignment.getType());
