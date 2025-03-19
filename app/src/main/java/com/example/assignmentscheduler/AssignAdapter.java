@@ -48,12 +48,12 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.AssignView
         return assignmentList.size();
     }
 
-    public class AssignViewHolder extends RecyclerView.ViewHolder {
-        private TextView assignmentName;
-        private TextView assignmentDueDate;
-        private TextView timeLeft;
-        private TextView assignmentType;
-        private ProgressBar progressBar;
+    public static class AssignViewHolder extends RecyclerView.ViewHolder {
+        private final TextView assignmentName;
+        private final TextView assignmentDueDate;
+        private final TextView timeLeft;
+        private final TextView assignmentType;
+        private final ProgressBar progressBar;
 
         public AssignViewHolder(@NonNull View itemView) {
             super(itemView);
