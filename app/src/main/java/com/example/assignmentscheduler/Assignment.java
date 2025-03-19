@@ -39,13 +39,16 @@ public class Assignment {
         return finalDate;
     }
 
-    public String getTimeBetween() {
-        long timeInMillis1 = startDate.getTimeInMillis();
-        long timeInMillis2 = endDate.getTimeInMillis();
+    public int getProgress() {
+        long totalDifferenceInHours = getDifferenceInMillis() / (1000 * 60 * 60);
+        long currentDurationInHours = Calendar.getInstance().getTimeInMillis() - startDate.getTimeInMillis() / (1000 * 60 * 60);
+        return (int) (currentDurationInHours / totalDifferenceInHours)  * 100;
+    }
 
-        long differenceInMillis = timeInMillis2 - timeInMillis1;
-        long differenceInHours = differenceInMillis / (1000 * 60 * 60);
-        long differenceInDays = differenceInMillis / (1000 * 60 * 60 * 24);
+    public String getTimeBetween() {
+        getDifferenceInMillis();
+        long differenceInHours = getDifferenceInMillis() / (1000 * 60 * 60);
+        long differenceInDays = getDifferenceInMillis() / (1000 * 60 * 60 * 24);
 
         if (differenceInDays < 1) {
             return differenceInHours + " hrs";
@@ -53,6 +56,12 @@ public class Assignment {
         else {
             return differenceInDays + " days";
         }
+    }
+
+    private long getDifferenceInMillis() {
+        long timeInMillis1 = startDate.getTimeInMillis();
+        long timeInMillis2 = endDate.getTimeInMillis();
+        return timeInMillis2 - timeInMillis1;
     }
 
     public String getName() {

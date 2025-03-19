@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.AssignView
         holder.assignmentDueDate.setText(assignment.printTotalDate());
         holder.assignmentType.setText(assignment.getType());
         holder.timeLeft.setText(assignment.getTimeBetween());
+        holder.progressBar.setProgress(assignment.getProgress());
     }
 
     @Override
@@ -51,6 +53,7 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.AssignView
         private TextView assignmentDueDate;
         private TextView timeLeft;
         private TextView assignmentType;
+        private ProgressBar progressBar;
 
         public AssignViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +61,8 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.AssignView
             assignmentDueDate = itemView.findViewById(R.id.assignmentDue);
             timeLeft = itemView.findViewById(R.id.timeText);
             assignmentType = itemView.findViewById(R.id.typeText);
+            progressBar = itemView.findViewById(R.id.progressBar);
+
         }
     }
 }
