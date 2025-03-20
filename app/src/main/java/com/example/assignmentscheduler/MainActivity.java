@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -106,18 +106,24 @@ public class MainActivity extends AppCompatActivity {
         listOfAssignments = gson.fromJson(json, type);
         if(listOfAssignments == null) {
             listOfAssignments = new ArrayList<>();
+        } else {
+            if (!listOfAssignments.isEmpty() && listOfAssignments.get(0) != null) {
+                checkIDS(listOfAssignments);
+                buildRecyclerView();
+            }
         }
-        checkIDS(listOfAssignments);
     }
 
     private void checkIDS(ArrayList<Assignment> list) {
         int latestID = 0;
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).getID() > latestID) {
-                latestID = list.get(i).getID();
-            }
-            else if (list.get(i).getID() <= latestID){
-                list.remove(i);
+        if(!list.isEmpty()) {
+            for(int i = 0; i < list.size(); i++) {
+                if(list.get(i).getID() > latestID) {
+                    latestID = list.get(i).getID();
+                }
+                else if (list.get(i).getID() <= latestID){
+                    list.remove(i);
+                }
             }
         }
     }
